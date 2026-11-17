@@ -20,7 +20,7 @@ export function getPipMetadataContentType(headers) {
  * @returns {void}
  */
 export function logSuppressedVersion(packageName, version) {
-  recordSuppressedVersion();
+  recordSuppressedVersion(packageName, version);
   ui.writeVerbose(
     `Safe-chain: ${packageName}@${version} is newer than ${getMinimumPackageAgeHours()} hours and was removed (minimumPackageAgeInHours setting).`
   );

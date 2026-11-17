@@ -111,11 +111,15 @@ export async function main(args) {
     }
 
     if (proxy.hasSuppressedVersions()) {
+      const suppressedVersions = proxy.getSuppressedVersions();
       ui.writeInformation(
         `${chalk.yellow(
           "ℹ",
         )} Safe-chain: Some package versions were suppressed during package metadata resolution due to minimum package age.`,
       );
+      for (const version of suppressedVersions) {
+        ui.writeInformation(`  - ${version}`);
+      }
       ui.writeInformation(
         `  To disable this check, use: ${chalk.cyan(
           "--safe-chain-skip-minimum-package-age",

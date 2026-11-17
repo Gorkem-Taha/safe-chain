@@ -1,5 +1,5 @@
 const state = {
-  hasSuppressedVersions: false,
+  suppressedVersions: new Set(),
 };
 
 /**
@@ -9,13 +9,20 @@ const state = {
  *
  * @returns {void}
  */
-export function recordSuppressedVersion() {
-  state.hasSuppressedVersions = true;
+export function recordSuppressedVersion(packageName, version) {
+  state.suppressedVersions.add(`${packageName}@${version}`);
 }
 
 /**
  * @returns {boolean}
  */
 export function getHasSuppressedVersions() {
-  return state.hasSuppressedVersions;
+  return state.suppressedVersions.size > 0;
+}
+
+/**
+ * @returns {string[]}
+ */
+export function getSuppressedVersions() {
+  return [...state.suppressedVersions];
 }
